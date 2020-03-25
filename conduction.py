@@ -27,7 +27,7 @@ size = 20
 
 # constante de simulation pour limiter les calculs
 cste = dt / (R * m * c)
-
+#PUTE
 def simulation():
 
     # espace à deux dimensions
