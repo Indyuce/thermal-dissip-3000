@@ -3,11 +3,11 @@ Modelisation de transfert thermique par conduction dans un milieu isotrope et un
 
 Lien utile: https://fr.wikipedia.org/wiki/Conduction_thermique
 
-Conductivité thermique massique de l'aluminium à 20°C: 185 W/mK
+Conductivité thermique massique de l'aluminium à 20°C: 185 W/mK\
 Notation: lambda
 
-On modélise le solide métallique par un quadrillage de points entre lesquels il y a une résistance thermique.
-https://fr.wikipedia.org/wiki/R%C3%A9sistance_thermique_de_conduction
+On modélise le solide métallique par un quadrillage de points entre lesquels il y a une résistance thermique.\
+https://fr.wikipedia.org/wiki/R%C3%A9sistance_thermique_de_conduction\
 Flux de chaleur: en W/s, notation: PHI majuscule
 
 PHI = dT / R
@@ -16,8 +16,7 @@ La résistance thermique s'exprime en fonction de l'épaisseur de la résistance
 
 R = e / (lambda * S)
 
-Nécessité de passer par l'énergie thermique pour calculer un transfert de température de proche en proche. Lien température-énergie thermique:
-https://fr.wikipedia.org/wiki/%C3%89nergie_thermique
+Nécessité de passer par l'énergie thermique pour calculer un transfert de température de proche en proche. Lien température-énergie thermique: https://fr.wikipedia.org/wiki/%C3%89nergie_thermique
 
 Q = m * c * dT
 
