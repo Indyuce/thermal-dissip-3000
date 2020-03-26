@@ -7,7 +7,7 @@ Conductivité thermique massique de l'aluminium à 20°C: 185 W/mK\
 Notation: lambda
 
 On modélise le solide métallique par un quadrillage de points entre lesquels il y a une résistance thermique.\
-https://fr.wikipedia.org/wiki/R%C3%A9sistance_thermique_de_conduction\
+https://fr.wikipedia.org/wiki/R%C3%A9sistance_thermique_de_conduction \
 Flux de chaleur: en W/s, notation: PHI majuscule
 
 PHI = dT / R
