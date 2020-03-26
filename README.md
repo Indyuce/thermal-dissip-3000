@@ -34,11 +34,10 @@ Q = dT * (dt * lambda * S / e)
 
 Maintenant on cherche la différence de température transmise.
 
-Q = mc * dTt
+Q = mc * dTt\
 Donc dTt = dT * (dt * lambda * S / e / mc)
 
-(dt * lambda * S / e / mc) est une constante donc on la calcule avant pour limiter les calculs à chaque itération. Plus dt est petit plus cette approximation est bonne.
-Sorte de méthode d'Euler pour avoir une solution approchée.
+(dt * lambda * S / e / mc) est une constante donc on la calcule avant pour limiter les calculs à chaque itération. Plus dt est petit plus cette approximation est bonne. Sorte de méthode d'Euler pour avoir une solution approchée.
 
 La température transmise de proche en proche dTt pendant dt est proportionelle à la différence de température actuelle dT, avec un coefficient de proportionnalité constant qui dépend des
 caractéristiques géométriques du dissipateur, du matériau utilisé...
