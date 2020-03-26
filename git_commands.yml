@@ -1,0 +1,26 @@
+# Crée un clone local d'un repository
+git clone <url>
+
+# Sauvegarde les changements dans un commit
+git commit -m <comment>
+
+# Push tous les commits
+git push (origin master)
+
+# Naviguer vers un ifchier
+cd git/...
+
+# Revenir au fichier Utilisateur principal
+cd
+
+# Register le changement d'un fichier
+git add <file name>
+
+# Supprime un dossier/fichier
+# -r n'est pas obligatoire pour un fichier
+git rm -r <folder>
+
+# Liste tous les fichiers dans le dossier actuel
+git ls-files
+
+# Pull -> Change -> Commit -> Push
