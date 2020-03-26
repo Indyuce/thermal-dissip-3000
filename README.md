@@ -12,8 +12,7 @@ Flux de chaleur: en W/s, notation: PHI majuscule
 
 PHI = dT / R
 
-La résistance thermique s'exprime en fonction de l'épaisseur de la résistance, de la surface de la résistance, et de la conductivité thermique.
-Résistance = inversement proportionelle à la conductivité et à la surface, proportionelle à l'epaisseur.
+La résistance thermique s'exprime en fonction de l'épaisseur de la résistance, de la surface de la résistance, et de la conductivité thermique. La résistance est inversement proportionelle à la conductivité et à la surface, proportionelle à l'epaisseur.
 
 R = e / (lambda * S)
 
@@ -22,15 +21,16 @@ https://fr.wikipedia.org/wiki/%C3%89nergie_thermique
 
 Q = m * c * dT
 
-Q = transfert d'énergie thermique (différence d'énergie, en J)
-m = masse du solide considéré
+Q = transfert d'énergie thermique (différence d'énergie, en J)\
+m = masse du solide considéré\
 c = capacité thermique massique du solide
 
 On a aussi l'expression du flux de chaleur:
 
-phi = Q/dt donc Q = phi * dt
-Q = (dT / R) * dt
-Q = dT / (e / lambda * S) * dt
+phi = Q / dt\
+Donc Q = phi * dt\
+Q = (dT / R) * dt\
+Q = dT / (e / lambda * S) * dt\
 Q = dT * (dt * lambda * S / e)
 
 Maintenant on cherche la différence de température transmise.
