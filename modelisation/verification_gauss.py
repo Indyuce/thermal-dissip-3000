@@ -21,7 +21,7 @@ c = 900
 
 # paramètres de la simulation
 time = 300
-iterations = 10000
+iterations = 1000
 dt = time / iterations
 size = 20
 
@@ -50,8 +50,8 @@ def simulation():
             for j in range(2, size - 1):
                 B[k][j] += (T[k + 1][j] - T[k][j]) * cste
                 B[k][j] += (T[k - 1][j] - T[k][j]) * cste
-                B[k][j] += (T[k][j + 1] - T[k][j]) * cste
-                B[k][j] += (T[k][j - 1] - T[k][j]) * cste
+            #    B[k][j] += (T[k][j + 1] - T[k][j]) * cste
+            #    B[k][j] += (T[k][j - 1] - T[k][j]) * cste
 
         T = B
 
@@ -65,7 +65,35 @@ def simulation():
         print('Conservation de l''énergie non vérifiée:', tempInit, s)
 
     X, Y = np.mgrid[0:size:1, 0:size:1]
-    Axes3D(plt.figure()).plot_wireframe(X, Y, T)    
+    ax = Axes3D(plt.figure())
+    ax.plot_wireframe(X, Y, T)
+    
+    # calcul de l'intégrale
+    integrale = 0
+    for k in range(0,size):
+        integrale += T[k][size//2]
+    print(integrale)
+    
+    # calcul de l'écart type
+    sigma = integrale / (np.sqrt(2 * np.pi) * T[size//2][size//2])
+    
+    # definition densité de proba
+    print('Lecart type est',sigma)
+    mu = size//2
+    def f(x):
+        return np.exp(-0.5 * ((x - mu) / sigma)**2) / (sigma * np.sqrt(2 * np.pi))
+    
+    # affichage courbe gaussienne pour comparaison théorique/numérique
+    X = [k for k in range(0, size)]
+    Y1 = [T[k][size//2] for k in range(0, size)]
+    Y2 = [integrale * f(k) for k in range(0, size)]
+    plt.clf()
+    plt.plot(X,Y1)
+    plt.plot(X,Y2)
+    #ax.plot(X, Y, color='red')
+    
+    
+    
     plt.show()
 
 simulation()
