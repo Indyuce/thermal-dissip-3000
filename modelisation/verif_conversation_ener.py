@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # conductivité thermique de l'aluminium à 20°C (W/mK)
-conduc = 237
+conduc = 185
 
 # paramètres géométriques
 e = 0.01 # epaisseur d'un bloc (m)
@@ -17,7 +17,7 @@ R = e / (conduc * S)
 
 # capacité thermique massique (J/kg/K)
 # permet d'établir le lien entre energie thermique et température
-c = 897
+c = 900
 
 # paramètres de la simulation
 time = 300
@@ -54,6 +54,14 @@ def simulation():
                 B[k][j] += (T[k][j - 1] - T[k][j]) * cste
 
         T = B
+
+    # conservation de l'énergie thermique
+    s = 0
+    for k in range(0, size):
+        for l in range(0, size):
+            s += T[k][l]
+    
+    print('Différence énergie thermique finale/initiale de',str(tempInit - s) / tempInit))
 
     X, Y = np.mgrid[0:size:1, 0:size:1]
     Axes3D(plt.figure()).plot_wireframe(X, Y, T)    
