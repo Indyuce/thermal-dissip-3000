@@ -21,7 +21,7 @@ c = 897
 
 # paramètres de la simulation
 time = 300
-iterations = 10000
+iterations = 1000
 dt = time / iterations
 size = 20
 
@@ -48,10 +48,8 @@ def simulation():
 
         for k in range(2, size - 1):
             for j in range(2, size - 1):
-                B[k][j] += (T[k + 1][j] - T[k][j]) * cste
-                B[k][j] += (T[k - 1][j] - T[k][j]) * cste
-                B[k][j] += (T[k][j + 1] - T[k][j]) * cste
-                B[k][j] += (T[k][j - 1] - T[k][j]) * cste
+                temp = T[k][j]
+                B[k][j] += (T[k + 1][j] + T[k - 1][j] + T[k][j + 1] + T[k][j - 1] - 4 * temp) * cste
 
         T = B
 

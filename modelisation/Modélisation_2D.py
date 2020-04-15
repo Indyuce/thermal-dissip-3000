@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+
+## code guillaume
+
 import numpy as np
 from math import *
 import matplotlib.pyplot as plt
@@ -42,6 +44,51 @@ def modélisation_2D() :
 #Algorithme Pivot de Gauss qu'on doit utiliser par la suite
 #Pivot de Gauss
 
+
+## code jules
+
+import numpy as np
+
+def solve():
+    
+    # température avec échange par convection avec l'extérieur
+    Tinf = 300
+    
+    # delta x correspondant à la longueur de controle
+    dx = .5
+    
+    # conductivité thermique du matériau
+    k = 80
+    
+    # puissance volumique
+    q = 100
+    
+    # coefficient de transfert par convection
+    h = 10
+    
+    A = np.array([[0, 1, 0, 1, -4, 1, 0, 1, 0],
+                  [1, -3 - h*dx/k, 1, 0, 1, 0, 0, 0, 0],
+                  [0, 0, 1, 0, 1, -3 - h*dx/k, 0, 0, 1],
+                  [0, 0, 0, 0, 1, 0, 1, -3 - h*dx/k, 1],
+                  [1, 0, 0, -3 - h*dx/k, 1, 0, 1, 0, 0],
+                  [-2 * (h*dx/k + 1), 1, 0, 1, 0, 0, 0, 0, 0],
+                  [0, 1, -2 * (h*dx/k + 1), 0, 0, 1, 0, 0, 0],
+                  [0, 0, 0, 1, 0, 0, -2 * (h*dx/k + 1), 1, 0],
+                  [0, 0, 0, 0, 0, 1, 0, 1, -2 * (h*dx/k + 1)]])
+    
+    B = np.array([[-q * (dx)**2 / k],
+                  [-q * (dx)**2 / k - h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - 2 * h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - 2 * h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - 2 * h * dx * Tinf / k],
+                  [-q * (dx)**2 / k - 2 * h * dx * Tinf / k]])
+    
+    return np.linalg.solve(A, B)
+
+## pivot de gauss codé en cours
 
 def matrice_augmentée(A,X) :
     B=np.zeros((len(A),len(A[0])+1))
