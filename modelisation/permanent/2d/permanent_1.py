@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from abc import ABC, abstractmethod
-
-size = 10
+import time
+import scipy as sc 
+size = 100
 
 # température avec échange par convection avec l'extérieur
 Tinf = 300
@@ -47,7 +48,8 @@ def findNature(x, y):
     return Centre(x, y)
 
 def solve():
-    
+    t1=time.perf_counter()
+    ax=Axes3D(plt.figure())
     A = np.zeros((size**2, size**2))
     B = np.zeros((size**2))
     
@@ -63,8 +65,18 @@ def solve():
         A[k] = point.getEquation()
         B[k] = -q * dx**2 + point.getConvectionTerm()
     
-    return np.linalg.solve(A, B)
-
+    C=np.linalg.solve(A, B)
+    print(C)
+    E=np.zeros((size,size))
+    for i in range(size) :
+        for j in range(size) :
+            E[i][j]=C[i+size*j]
+    X,Y=np.mgrid[0:size:1,0:size:1]
+    ax.plot_wireframe(X,Y,E)
+    t2=time.perf_counter()
+    print(t2-t1)
+    plt.show()
+    
 def getIndex(x, y):
     return x + y * size
 
