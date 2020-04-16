@@ -16,10 +16,10 @@ dx = .5
 k = 80
 
 # puissance volumique
-q = 100
+q = 1000
 
 # coefficient de transfert par convection
-h = 10
+h = 3.24
 
 
 #Ici 0-> il n'y a rien
@@ -119,8 +119,6 @@ def visio_3D() :
             max=S[k][0]
         if S[k][0]!=0 and S[k][0]<min :
             min=S[k][0]
-    print(max)
-    print(min)
     for x in range(size) :
         for y in range(size) :
             for z in range(size) :
@@ -135,13 +133,12 @@ def visio_3D() :
                     #que les valeurs soient comprises dans cet intervalle
         
                     coef_couleur=(S[k][0]/(max-min)-min/(max-min))
-                    print(coef_couleur)
                     ax.plot_surface(X,Y,Z,color=cmap(coef_couleur))          
 
+    plt.title("Chaleur  maximale: "+str(int(max))+"K Chaleur minimale: "+str(int(min))+"K")
     plt.show()
 
 def coupeHoriz(z) :
-    axes=plt.gca()
     ax=Axes3D(plt.figure())
     S=solve()
     T=np.zeros(size**2)
