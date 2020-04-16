@@ -75,8 +75,7 @@ def getnature(x,y,z) :
     return(a)                       
                     
 def solve() :
-    cmap=cm.coolwarm
-    ax=Axes3D(plt.figure())
+    
     #La matrice A contient la matrice carrée utilisée pour le pivot de Gauss
     A=np.zeros((size**3,size**3))
     #La matrice B contient la matrice colonne utilisée pour le pivot
@@ -103,9 +102,15 @@ def solve() :
             A[k][k]=1
             B[k]=0
     S=np.linalg.solve(A,B)
+   
+    return(S)
+    
+def visio_3D() :
+    cmap=cm.coolwarm
+    ax=Axes3D(plt.figure())
+    S=solve()
     #On cherche a connaitre le min et le max pour bien exploiter le gradoient de couleur
     #Comme dit avant on prend le premier coef non nul pour le min sinon min=0
-    print(S)
     j=recherche_1er_coef_non_nul(S)
     min=S[j][0]
     max=S[0][0]
@@ -126,15 +131,35 @@ def solve() :
                     X=np.sin(Theta)*np.cos(Phi)*0.2+x
                     Y=np.sin(Theta)*np.sin(Phi)*0.2+y
                     Z=np.cos(Theta)*0.2+z
-                    #Normallement 0-> bleu et 300-> foncé ici ont fait en sorte
+                    #Normallement 0-> bleu et 1-> foncé ici ont fait en sorte
                     #que les valeurs soient comprises dans cet intervalle
-                    #Le gradient fonctionne mal alors que les valeurs de coef_couleur sont normales
+        
                     coef_couleur=(S[k][0]/(max-min)-min/(max-min))
                     print(coef_couleur)
                     ax.plot_surface(X,Y,Z,color=cmap(coef_couleur))          
 
     plt.show()
 
+def coupeHoriz(z) :
+    axes=plt.gca()
+    ax=Axes3D(plt.figure())
+    S=solve()
+    T=np.zeros(size**2)
+    #On prend seulement une matrice qui correspond aux valeurs voulues pour la coupe
+    for k in range(size**2) :
+        T[k]=S[z*size**2+k]
+    X,Y =np.mgrid[0:size:1,0:size:1]
+    #On fait en sorte  que les blocs ou il y a rien aient la temperature Tinf
+    #Le graphique est moins ecrasé grace a ca
+    Z=Tinf*np.ones((size,size))
+    for i in range(size) :
+        for j in range(size) :
+            if T[i+j*size]!=0 :
+                Z[i][j]=T[i+j*size]
+    surf=ax.plot_surface(X,Y,Z,cmap=cm.coolwarm)
+    
+    plt.colorbar(surf)
+    plt.show()
 
 
 
