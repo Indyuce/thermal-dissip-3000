@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import time
 from math import *
 from matplotlib import cm
-size = 10
+size = 8
 
 # température avec échange par convection avec l'extérieur
 Tinf = 300
@@ -19,7 +19,7 @@ k = 80
 q = 1000
 
 # coefficient de transfert par convection
-h = 3.24
+h = 8
 
 
 #Ici 0-> il n'y a rien
@@ -32,8 +32,12 @@ h = 3.24
 A=np.zeros((size,size))
 for i in range(1,size-1) :
     for j in range(1,size-1) :
-        A[i][j]+=2
+        A[i][j]+=1
+for i in range(3,size-3) :
+    for j in range(3,size-3) :   
+        A[i][j]+=0
 C=[A for k in range(size)]
+
 #Les matrices A representent un coupe de l'espace 
 
 
@@ -47,7 +51,7 @@ C=[A for k in range(size)]
 #Pas très important
 def recherche_1er_coef_non_nul(A) :
     k=0 
-    while A[k][0]==0 :
+    while A[k][0]==0 and k<(len(A)-1):
         k+=1
     return(k)
         
@@ -91,7 +95,7 @@ def solve() :
             a=getnature(x,y,z)
             A[k]=a.getEquation()
             B[k]=a.getConvectionTerm()
-        if C[z][x][y]==2 :
+        elif C[z][x][y]==2 :
             a=getnature(x,y,z)
             A[k]=a.getEquation()
             B[k]=a.getConvectionTerm()-q*(dx)**2
@@ -101,6 +105,8 @@ def solve() :
         else :
             A[k][k]=1
             B[k]=0
+    print(C)
+    
     S=np.linalg.solve(A,B)
    
     return(S)
@@ -134,7 +140,6 @@ def visio_3D() :
         
                     coef_couleur=(S[k][0]/(max-min)-min/(max-min))
                     ax.plot_surface(X,Y,Z,color=cmap(coef_couleur))          
-
     plt.title("Chaleur  maximale: "+str(int(max))+"K Chaleur minimale: "+str(int(min))+"K")
     plt.show()
 
